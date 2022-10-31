@@ -14,6 +14,8 @@ function App() {
   const [supplierInput, setSupplierInput] = useState("");
   const [costInput, setCostInput] = useState("");
 
+  const [inventory, setInventory] = useState<SKU>([]);
+
   const logInputState = () => {
     console.log(`SKU: ${skuInput}`)
     createNewInventoryComponent();
@@ -22,6 +24,10 @@ function App() {
   const createNewInventoryComponent = () => {
     let temp: SKU = new SKU(skuInput, nameInput, descInput, qtyOnHandInput);
     console.log(`new SKU: ${JSON.stringify(temp)}`)
+
+    setInventory([...inventory, temp]);
+
+    //console.log(inventory);
   }
 
   return (
@@ -47,6 +53,7 @@ function App() {
         <input onChange={(evt)=> setSupplierInput(evt.target.value)} placeHolder="Supplier"></input>
         <input onChange={(evt)=> setCostInput(evt.target.value)} placeHolder="Cost"></input>
         <button onClick={() => logInputState()}>Add new Inventory Item</button>
+        <button onClick={() => {console.log({inventory})}}> debug inventory</button>
       </div>
       </div>
     </div>
