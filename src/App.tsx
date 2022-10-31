@@ -56,6 +56,28 @@ function App() {
         <button onClick={() => {console.log({inventory})}}> debug inventory</button>
       </div>
       </div>
+      <table className='inventoryTable'>
+        <thead>
+          <tr>
+          <th>SKU</th><th>Product</th><th>Description</th><th>Quantity</th><th>Supplier</th><th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inventory.map((entry, index) => {
+            return (
+              
+              <tr key={entry.id}>
+                <td>{entry.id}</td>
+                <td>{entry.name}</td>
+                <td>{entry.description}</td>
+                <td>{entry.qtyOnHand}</td>
+
+                <td>x</td>
+              </tr>
+            )
+        })}
+        </tbody>
+      </table>
     </div>
   )
 }
