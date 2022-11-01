@@ -1,8 +1,12 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 
-import SKU from './interfaces.ts'
+import SKU from './interfaces'
+import { Server } from './api'
+
+import axios from 'axios'
+
+const server = new Server();
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +18,7 @@ function App() {
   const [supplierInput, setSupplierInput] = useState("");
   const [costInput, setCostInput] = useState("");
 
-  const [inventory, setInventory] = useState<SKU>([]);
+  const [inventory, setInventory] = useState<SKU[]>([]);
 
   const logInputState = () => {
     console.log(`SKU: ${skuInput}`)
@@ -27,7 +31,15 @@ function App() {
 
     setInventory([...inventory, temp]);
 
+    server.addNewInventoryComponent(temp);
+
     //console.log(inventory);
+  }
+
+  const clickDebugButton = () => {
+    console.log(inventory);
+    server.ping();
+    //server.pong();
   }
 
   return (
@@ -46,14 +58,14 @@ function App() {
       </select>
       */} 
       <div className="generalInformation">
-        <input onChange={(evt)=> setSkuInput(evt.target.value)} placeHolder="SKU"></input>
-        <input onChange={(evt)=> setNameInput(evt.target.value)} placeHolder="Name"></input>
-        <input onChange={(evt)=> setDescInput(evt.target.value)} placeHolder="Description"></input>
-        <input onChange={(evt)=> setQtyOnHandInput(evt.target.value)} placeHolder="Quantity on Hand"></input>
-        <input onChange={(evt)=> setSupplierInput(evt.target.value)} placeHolder="Supplier"></input>
-        <input onChange={(evt)=> setCostInput(evt.target.value)} placeHolder="Cost"></input>
+        <input onChange={(evt)=> setSkuInput(evt.target.value)} placeholder="SKU"></input>
+        <input onChange={(evt)=> setNameInput(evt.target.value)} placeholder="Name"></input>
+        <input onChange={(evt)=> setDescInput(evt.target.value)} placeholder="Description"></input>
+        <input onChange={(evt)=> setQtyOnHandInput(parseInt(evt.target.value))} placeholder="Quantity on Hand"></input>
+        <input onChange={(evt)=> setSupplierInput(evt.target.value)} placeholder="Supplier"></input>
+        <input onChange={(evt)=> setCostInput(evt.target.value)} placeholder="Cost"></input>
         <button onClick={() => logInputState()}>Add new Inventory Item</button>
-        <button onClick={() => {console.log({inventory})}}> debug inventory</button>
+        <button onClick={() => {clickDebugButton()}}> debug inventory</button>
       </div>
       </div>
       <table className='inventoryTable'>
