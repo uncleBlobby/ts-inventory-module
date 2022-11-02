@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite && gnome-terminal", 
+    "dev": "vite && gnome-terminal",
     "backend": "nodemon /home/dustin/projects/ts-inventory-module/server/server.cjs",
     "build": "tsc && vite build",
     "preview": "vite preview"
@@ -15,7 +15,8 @@
     "express": "^4.18.2",
     "nodemon": "^2.0.20",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.22",

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import SKU from './interfaces';
 
+const API_URL = "http://localhost:5174/";
+
 export class Server {
     constructor(){
 
@@ -8,7 +10,7 @@ export class Server {
 
     ping = () => {
         console.log(`pinging server...`);
-        axios.get('http://localhost:5174/')
+        axios.get(API_URL)
             .then(function (response) {
                 console.log(response);
             })
@@ -22,7 +24,7 @@ export class Server {
 
     pong = (thisSku: SKU) => {
         console.log(`ponging server...`);
-        axios.post('http://localhost:5174/addInventoryComponent', {
+        axios.post(API_URL + 'addInventoryComponent', {
             sku: thisSku
         })
             .then(function (response) {
@@ -38,7 +40,7 @@ export class Server {
     
     addNewInventoryComponent = (thisSku: SKU) => {
         console.log(`adding new inventory component...`);
-        axios.post('http://localhost:5174/addInventoryComponent', {
+        axios.post(API_URL + 'addInventoryComponent', {
             sku: thisSku
         })
             .then(function (response) {
